@@ -12,3 +12,6 @@ CREATE TABLE `tbl_employee` (
     REFERENCES `novice-project-schema`.`tbl_department` (`department_id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);
+
+ALTER TABLE `novice-project-schema`.`tbl_employee` 
+CHANGE COLUMN `birth_date` `birth_date` DATE NULL DEFAULT NULL ;

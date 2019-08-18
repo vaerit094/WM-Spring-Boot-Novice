@@ -1,6 +1,5 @@
 package springboot.camp.noviceproject.domain;
 
-import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -14,12 +13,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "tbl_department")
-public class Department implements Serializable {
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -3409154209572913946L;
+public class Department {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -29,8 +23,12 @@ public class Department implements Serializable {
 	@Column(name = "department_name", length = 250, nullable = false)
 	private String departmentName;
 
-	@OneToMany(mappedBy = "departmentFk", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "departmentId", cascade = CascadeType.ALL)
 	private List<Employee> employees;
+
+	public Department() {
+
+	}
 
 	public Department(Integer departmentId, String departmentName, List<Employee> employees) {
 		this.departmentId = departmentId;

@@ -1,6 +1,5 @@
 package springboot.camp.noviceproject.domain;
 
-import java.io.Serializable;
 import java.time.LocalDate;
 
 import javax.persistence.Column;
@@ -12,14 +11,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "tbl_employee")
-public class Employee implements Serializable {
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -8859253108787934646L;
+public class Employee {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
@@ -38,18 +34,23 @@ public class Employee implements Serializable {
 	@Column(name = "birth_date")
 	private LocalDate birthDate;
 
+	@JsonIgnore
 	@ManyToOne
-	@JoinColumn
-	private String departmentFk;
+	@JoinColumn(name = "department_id", nullable = false)
+	private Department departmentId;
+
+	public Employee() {
+
+	}
 
 	public Employee(Integer employeeId, String firstName, String lastName, String phoneNumber, LocalDate birthDate,
-			String departmentFk) {
+			Department departmentId) {
 		this.employeeId = employeeId;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.phoneNumber = phoneNumber;
 		this.birthDate = birthDate;
-		this.departmentFk = departmentFk;
+		this.departmentId = departmentId;
 	}
 
 	public Integer getEmployeeId() {
@@ -92,12 +93,12 @@ public class Employee implements Serializable {
 		this.birthDate = birthDate;
 	}
 
-	public String getDepartmentFk() {
-		return departmentFk;
+	public Department getDepartmentId() {
+		return departmentId;
 	}
 
-	public void setDepartmentFk(String departmentFk) {
-		this.departmentFk = departmentFk;
+	public void setDepartmentId(Department departmentId) {
+		this.departmentId = departmentId;
 	}
 
 }
